@@ -10,7 +10,7 @@ plot(ts);
 title('Daily Closing Prices'); xlabel('number of observation'); ylabel('DAX closing prices');
 
 // (b) Compute daily log returns
-x=diff(log(s));
+x=diff(log(ts));
 scf;,clf;
 // Plot daily log returns
 plot(x);
