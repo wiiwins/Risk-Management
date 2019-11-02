@@ -2,32 +2,34 @@
 // Jurian Kahl
 // Nattawut Phanrattinon
 
-// (a)
+// (a) 
 function v = VaR_log_normal (s, alpha)
     x = diff(log(s))
     mu = mean(x);
     sigma = sqrt(variance(x));
     q = cdfnor("X", 0, 1, alpha, 1-alpha);
-    v =  s($) * ( 1 - exp(-sigma*q + mu) );
+    v =  s .* ( 1 - exp(-sigma*q + mu) );
 endfunction
 
 // (b)
-dax = csvRead('dax_data.csv', ';',[],[],[],[],[],1); 
-s = dax(:,2);
+// import data
+data = csvRead('dax_data.csv', ';', '.','double',[],[],[],1);
+s = data(:,2);
 
 alpha = [0.9,0.95];
 
 n = length(s);
-violations = zeros(length(alpha),n);
 
-//loss and VaR
+// create vector memory
+violations = zeros(length(alpha),n);
+VaR = zeros(length(alpha),n);
+
 loss = -(diff(s));
 L = [0;loss];
 
-VaR = zeros(length(alpha),n);
 
 
-//violations
+// calculate violations
 for j = 1:length(alpha)
     for i = 253:n;
         VaR(j,i) = VaR_log_normal(s(i-252:i-1), alpha(j));
@@ -35,6 +37,7 @@ for j = 1:length(alpha)
     end
 end
 
+// Plot loss and VaR
 plot(L(1:n), '.');    
 plot(VaR(1,(1:n)),'r');
 plot(VaR(2,(1:n)),'g');
