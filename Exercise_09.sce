@@ -13,7 +13,7 @@ function [VaR, ES]=VaR_ES_var_covar(x_data, c, w, alpha)
     mu = mean(x_data, "r");
     sigma = cov(x_data);
     z = cdfnor('X', 0, 1, alpha, 1-alpha);
-    // ecompute estimate VaR and ES from (2.2) and (2.3)
+    // Compute estimate VaR and ES from (2.2) and (2.3)
     VaR = -(c + w'*mu') + sqrt(w'*sigma*w)*z;
     ES = -(c + w'*mu') + sqrt(w'*sigma*w)/(1-alpha)*phi(z);
 endfunction
@@ -26,10 +26,11 @@ SAP = csvRead('SAP.csv', ';', ',', 'double', [], [], [], 1);
 SI = csvRead('Siemens.csv', ';', ',', 'double', [], [], [], 1);
 VW = csvRead('Volkswagen.csv', ';', ',', 'double', [], [], [], 1);
 
+// s is closing price value of 5 stocks in each column
 s = [BMW(:,5),CON(:,5),SAP(:,5),SI(:,5),VW(:,5)];
 
 // reverses the value ordering to make us calculated easiler
 s = flipdim(s,1);
 
-//compute logarithm return each row
+//compute logarithm return for each row
 x = [zeros(1,5); diff(log(s),1,'r')];
