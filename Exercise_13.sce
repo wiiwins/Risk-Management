@@ -20,6 +20,7 @@ function v = VaR_log_normal (s, alpha)
     v =  s($) * ( 1 - exp(-sigma*q + mu) );
 endfunction
 
+// read data
 data = csvRead('dax_data.csv', ';', '.','double',[],[],[],1);
 s = data(:,2);
 
@@ -34,15 +35,17 @@ ES_historic = zeros(length(alpha),length(s));
 VaR_lognorm = zeros(length(alpha),length(s));
 
 td = 248;
-//compute VaR and ES with historical simulation 
+
+
 for j = 1:length(alpha)
     for m = (td+1) :(length(s)-1)
     
-    // define loss operator and compute VaR and ES with historical simulation
+    // define loss operator 
     function y=l(x)
         y= s(m) * (1-exp(x))
     endfunction
     
+    //compute VaR and ES with historical simulation 
     [VaR_historic(j,m+1), ES_historic(j,m+1)] = VaR_ES_historic (x(m-td+1:m), l, alpha(j));
     
     
@@ -52,11 +55,10 @@ for j = 1:length(alpha)
     end
 end
 
-//compare lognormal method and historical simulation in a new plot
+
 scf(0); clf(0);
 
-// plot value at risk
-// value at risk
+// plot value at risk and compare with Exercise5
 subplot(3,1,1);
 plot (VaR_historic(1,td+2:$));
 plot (VaR_lognorm(1,td+2:$), 'r');
@@ -71,7 +73,7 @@ title ('Value at Risk at 95%');
 xlabel('trading day');
 legend("Historical Simulation", "log_normal Method");
 
-// expected shortfall
+// plot expected shortfall
 subplot(3,1,3);
 plot (ES_historic(1,td+2:$));
 plot (ES_historic(2,td+2:$), 'g');
