@@ -70,7 +70,7 @@ endfunction
 data = csvRead('risk1920_Exercise_17_data.dat')
 scf(1); clf();
 Hill_Plot(data);
-title("data set");
+title("Hill plot");
 
 //choose k = 40 for reasonable choice since it seems to be constant after some initial oscilations from Hill plot above
 p = 0.98;
