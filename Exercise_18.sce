@@ -1,5 +1,5 @@
 // C-Exercise 18
-// Jurain Kahl
+// Jurian Kahl
 // Nattawut Phanrattinon
 
 funcprot(0);
