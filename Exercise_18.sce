@@ -72,5 +72,5 @@ sigma1 = 0.0195;
 [VaR, ES] = VaR_ES_GARCH_11_MC (k,m,l,alpha,theta, sigma1);
 
 // results
-disp(string(k) + "-day-ahead estimates:")
+disp(string(k) + " days ahead estimates:")
 disp("VaR: " + string(VaR) + "      ES: " + string(ES))
