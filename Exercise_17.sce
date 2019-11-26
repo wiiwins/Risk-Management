@@ -3,7 +3,7 @@
 // Nattawut Phanrattinon
 
 // download distfun package
-//atomsInstall("distfun");
+atomsInstall("distfun");
 
 // Part a)
 // Hill estimator function
@@ -30,19 +30,19 @@ m = 3;
 N = 500;
 lambda = 1;
 
-//subplot(3,1,1);
-//title ("Students t distribution with df = 3");
-//xlabel("k"); ylabel("Hill estimator");
-//for k=1:m
-//    Hill_Plot(distfun_trnd(3, N, 1));
-//end
+subplot(3,1,1);
+title ("t-distribution with df = 3");
+xlabel("k"); ylabel("Hill estimator");
+for k=1:m
+    Hill_Plot(distfun_trnd(3, N, 1));
+end
 
-//subplot(3,1,2);
-//title ("Students t distribution with df = 8");
-//xlabel("k"); ylabel("Hill estimator");
-//for k=1:m
-//    Hill_Plot(distfun_trnd(8, N, 1));
-//end
+subplot(3,1,2);
+title ("t-distribution with df = 8");
+xlabel("k"); ylabel("Hill estimator");
+for k=1:m
+    Hill_Plot(distfun_trnd(8, N, 1));
+end
 
 
 subplot(3,1,3);
